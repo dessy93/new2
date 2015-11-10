@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true" />
+    <package name="news" namespace="/news" extends="struts-default">    
+        <action name="*" class="example.CategoryAction" method="list">
+            <result>/news/{1}.jsp</result>
+        </action >
+    </package>
+   
+    
+      <package name="front" namespace="/" extends="struts-default">
+ 
+          <default-action-ref name="Category-list" />
+        <action name="Category-list" class="example.CategoryAction" method="list">
+            <result>/index.jsp</result>
+        </action>
+        
+<!--   爬虫测试动作     -->
+           <action name="crowling" class="com.spider" method="crwoling">
+            <result>/spider.jsp</result>        
+           </action>
+           
+            <action name="QBcrowling" class="com.QBSpider" method="crwoling">
+            <result>/QBspider.jsp</result>        
+           </action>
+                     
+           
+<!--           径问题此时刚好跟css文件一个路径-->
+        
+         <action name="find" class="example.CategoryAction" method="list">
+            <result>admin/test.jsp</result>
+        </action>
+        
+           
+    </package>
+    
+ <package name="admin" namespace="/admin" extends="struts-default">
+    
+     
+     <action name="index">
+         <result>/admin/index.html</result>
+     </action> 
+     
+ <action name="*-*" class="example.{1}Action" method="{2}">
+  <result>/admin/{1}-{2}.jsp</result> 
+  <result name="input">/admin/{1}-{2}.jsp</result>
+ </action>
+ 
+ 
+</package>
+    
+ </struts>
+
